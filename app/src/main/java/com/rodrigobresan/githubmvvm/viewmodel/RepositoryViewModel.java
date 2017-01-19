@@ -1,8 +1,6 @@
 package com.rodrigobresan.githubmvvm.viewmodel;
 
 import android.content.Context;
-import android.databinding.BaseObservable;
-import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -10,6 +8,7 @@ import android.view.View;
 import com.rodrigobresan.githubmvvm.GithubApplication;
 import com.rodrigobresan.githubmvvm.data.GithubService;
 import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
 import java.util.List;
 

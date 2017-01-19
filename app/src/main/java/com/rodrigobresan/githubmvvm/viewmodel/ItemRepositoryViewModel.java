@@ -34,7 +34,6 @@ public class ItemRepositoryViewModel extends BaseObservable {
 
     public void onItemClick(View view) {
         context.startActivity(RepositoryDetailActivity.launchDetail(view.getContext(), repository));
-        //TODO open detail of repo
     }
 
     public void setRepository(Repository repository) {

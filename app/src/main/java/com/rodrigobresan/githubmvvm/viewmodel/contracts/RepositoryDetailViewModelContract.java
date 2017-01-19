@@ -1,4 +1,4 @@
-package com.rodrigobresan.githubmvvm.viewmodel;
+package com.rodrigobresan.githubmvvm.viewmodel.contracts;
 
 import android.content.Context;
 
