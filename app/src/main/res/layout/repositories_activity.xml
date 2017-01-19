@@ -58,7 +58,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:onClick="@{repositoryViewModel::onClickFabLoad}"
-            android:src="@android:drawable/stat_notify_sync"/>
+            android:src="@android:drawable/stat_notify_sync"
+            android:layout_gravity="end|bottom"
+            android:layout_marginLeft="@dimen/fab_margin_horizontal"
+            android:layout_marginBottom="@dimen/fab_margin_bottom"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>
