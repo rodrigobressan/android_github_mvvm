@@ -100,6 +100,5 @@ public class RepositoryViewModel implements RepositoryViewModelContract.ViewMode
         unSubscribeFromObservable();
         mainView = null;
         context = null;
-        mainView = null;
     }
 }

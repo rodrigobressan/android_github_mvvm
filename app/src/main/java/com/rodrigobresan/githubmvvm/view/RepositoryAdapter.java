@@ -31,7 +31,12 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
 
     @Override
     public RepositoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemRepositoryBinding itemRepositoryBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_repository, parent, false);
+        ItemRepositoryBinding itemRepositoryBinding = DataBindingUtil
+                .inflate(LayoutInflater.from(parent.getContext()),
+                        R.layout.item_repository,
+                        parent,
+                        false);
+
         return new RepositoryViewHolder(itemRepositoryBinding);
     }
 
@@ -45,7 +50,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
         return repositoryList.size();
     }
 
-    public class RepositoryViewHolder extends RecyclerView.ViewHolder{
+    public class RepositoryViewHolder extends RecyclerView.ViewHolder {
 
         private ItemRepositoryBinding itemRepositoryBinding;
 

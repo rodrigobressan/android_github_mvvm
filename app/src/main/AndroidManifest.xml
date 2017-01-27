@@ -24,7 +24,7 @@
 
         <!-- Repository detail screen -->
         <activity
-            android:name=".view.RepositoryDetailActivity"
+            android:name=".view.CommitsActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>

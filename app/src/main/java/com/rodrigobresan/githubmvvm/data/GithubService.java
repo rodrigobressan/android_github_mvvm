@@ -1,6 +1,7 @@
 package com.rodrigobresan.githubmvvm.data;
 
 import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.model.Commit;
 
 import java.util.List;
 
@@ -23,4 +24,7 @@ public interface GithubService {
 
     @GET("/users/{userId}/repos")
     Observable<List<Repository>> fetchRepositories(@Path("userId") String userId);
+
+    @GET("/repos/{userId}/{repositoryId}/commits")
+    Observable<List<Commit>> fetchRepositoryDetail(@Path("userId") String owner, @Path("repositoryId") String repositoryId);
 }

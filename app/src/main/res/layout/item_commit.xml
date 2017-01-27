@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="commitViewModel"
+            type="com.rodrigobresan.githubmvvm.viewmodel.ItemCommitViewModel"/>
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/item_commit_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@{commitViewModel.sha}"
+            android:id="@+id/txt_item_commit_sha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="@{commitViewModel.message}"
+            android:id="@+id/txt_item_commit_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</layout>

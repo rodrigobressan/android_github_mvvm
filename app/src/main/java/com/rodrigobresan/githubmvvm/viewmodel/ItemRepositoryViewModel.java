@@ -5,7 +5,7 @@ import android.databinding.BaseObservable;
 import android.view.View;
 
 import com.rodrigobresan.githubmvvm.model.Repository;
-import com.rodrigobresan.githubmvvm.view.RepositoryDetailActivity;
+import com.rodrigobresan.githubmvvm.view.CommitsActivity;
 
 /**
  * Created by rodrigobresan on 1/15/17.
@@ -33,7 +33,7 @@ public class ItemRepositoryViewModel extends BaseObservable {
     }
 
     public void onItemClick(View view) {
-        context.startActivity(RepositoryDetailActivity.launchDetail(view.getContext(), repository));
+        context.startActivity(CommitsActivity.launchDetail(view.getContext(), repository));
     }
 
     public void setRepository(Repository repository) {

@@ -1,5 +1,7 @@
 package com.rodrigobresan.githubmvvm.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -13,4 +15,7 @@ public class Repository implements Serializable {
     public String name;
     public String description;
     public String url;
+
+    @SerializedName("owner")
+    public RepositoryOwner repositoryOwner;
 }
