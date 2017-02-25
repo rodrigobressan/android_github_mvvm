@@ -55,6 +55,6 @@ dependencies {
 
     //
     compile dagger
-    annotationProcessor daggerCompiler
+    apt daggerCompiler
     provided jrs
 }

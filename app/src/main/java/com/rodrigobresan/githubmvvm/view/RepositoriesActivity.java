@@ -9,8 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.rodrigobresan.githubmvvm.GithubApplication;
 import com.rodrigobresan.githubmvvm.R;
 import com.rodrigobresan.githubmvvm.databinding.RepositoriesActivityBinding;
+import com.rodrigobresan.githubmvvm.di.component.NetComponent;
 import com.rodrigobresan.githubmvvm.model.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.RepositoryViewModel;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
@@ -41,8 +43,10 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     }
 
     private void initDataBinding() {
+
+        NetComponent netComponent = ((GithubApplication) getApplication()).getNetComponent();
         repositoriesActivityBinding = DataBindingUtil.setContentView(this, R.layout.repositories_activity);
-        repositoryViewModel = new RepositoryViewModel(mainView, getContext());
+        repositoryViewModel = new RepositoryViewModel(mainView, netComponent);
         repositoriesActivityBinding.setRepositoryViewModel(repositoryViewModel);
     }
 

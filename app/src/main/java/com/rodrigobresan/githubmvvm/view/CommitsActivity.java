@@ -10,13 +10,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.rodrigobresan.githubmvvm.GithubApplication;
 import com.rodrigobresan.githubmvvm.R;
 import com.rodrigobresan.githubmvvm.databinding.CommitsActivityBinding;
+import com.rodrigobresan.githubmvvm.di.component.DaggerNetComponent;
+import com.rodrigobresan.githubmvvm.di.component.NetComponent;
 import com.rodrigobresan.githubmvvm.model.Commit;
 import com.rodrigobresan.githubmvvm.model.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.CommitsViewModel;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.CommitViewModelContract;
-import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
 import java.util.List;
 
@@ -48,24 +50,20 @@ public class CommitsActivity extends AppCompatActivity
 
         getExtrasFromIntent();
         initDataBinding();
-        setUpListCommits(commitBinding.recyclerCommits);
-    }
-
-    private void setUpListCommits(RecyclerView recyclerCommits) {
-        CommitsAdapter commitsAdapter = new CommitsAdapter();
-        recyclerCommits.setAdapter(commitsAdapter);
-        recyclerCommits.setLayoutManager(new LinearLayoutManager(this));
+        setUpCommitsList(commitBinding.recyclerCommits);
     }
 
     private void initDataBinding() {
+        NetComponent netComponent = ((GithubApplication) getApplication()).getNetComponent();
         commitBinding = DataBindingUtil.setContentView(this, R.layout.commits_activity);
-        commitsViewModel = new CommitsViewModel(commitsView, this, repository);
+        commitsViewModel = new CommitsViewModel(commitsView, netComponent, repository);
         commitBinding.setRepositoryViewModel(commitsViewModel);
     }
 
-    @Override
-    public Context getContext() {
-        return CommitsActivity.this;
+    private void setUpCommitsList(RecyclerView recyclerCommits) {
+        CommitsAdapter commitsAdapter = new CommitsAdapter();
+        recyclerCommits.setAdapter(commitsAdapter);
+        recyclerCommits.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -76,7 +74,7 @@ public class CommitsActivity extends AppCompatActivity
 
     @Override
     public void displayError() {
-        Toast.makeText(getContext(), "Error while loading", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Error while loading", Toast.LENGTH_SHORT).show();
     }
 
     public void getExtrasFromIntent() {

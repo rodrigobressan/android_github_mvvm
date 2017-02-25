@@ -1,18 +1,23 @@
 package com.rodrigobresan.githubmvvm.viewmodel;
 
-import android.content.Context;
+import android.app.Activity;
 import android.databinding.ObservableInt;
+import android.databinding.repacked.google.common.eventbus.Subscribe;
 import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.rodrigobresan.githubmvvm.GithubApplication;
 import com.rodrigobresan.githubmvvm.data.GithubService;
-import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.di.component.NetComponent;
 import com.rodrigobresan.githubmvvm.model.Commit;
+import com.rodrigobresan.githubmvvm.model.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.CommitViewModelContract;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -32,15 +37,22 @@ public class CommitsViewModel implements CommitViewModelContract.ViewModel {
     private Repository repository;
     private CommitViewModelContract.DetailView detailView;
 
-    private Context context;
     private Subscription subscription;
 
+    @Inject
+    GithubService githubService;
+
+    @Inject
+    Scheduler scheduler;
+
     public CommitsViewModel(@NonNull CommitViewModelContract.DetailView detailView,
-                            @NonNull Context context,
+                            @NonNull NetComponent netComponent,
                             @NonNull Repository repository) {
+
         this.repository = repository;
         this.detailView = detailView;
-        this.context = context;
+
+        netComponent.inject(this);
 
         detailsProgress = new ObservableInt(View.GONE);
         commitsList = new ObservableInt(View.GONE);
@@ -57,17 +69,13 @@ public class CommitsViewModel implements CommitViewModelContract.ViewModel {
     private void fetchCommits() {
         unSubscribeFromObservable();
 
-        GithubApplication githubApplication = GithubApplication.create(context);
-        GithubService githubService = githubApplication.getGithubService();
-
         subscription = githubService.fetchRepositoryDetail(repository.repositoryOwner.login, repository.name)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(githubApplication.subscribeScheduler())
+                .subscribeOn(scheduler)
                 .subscribe(new Action1<List<Commit>>() {
                     @Override
                     public void call(List<Commit> commitList) {
                         // update UI observables
-
                         if (detailView != null) {
                             detailView.loadCommits(commitList);
                         }
@@ -105,6 +113,5 @@ public class CommitsViewModel implements CommitViewModelContract.ViewModel {
     public void destroy() {
         unSubscribeFromObservable();
         detailView = null;
-        context = null;
     }
 }

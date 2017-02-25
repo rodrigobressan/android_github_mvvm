@@ -1,13 +1,12 @@
 package com.rodrigobresan.githubmvvm;
 
 import android.app.Application;
-import android.content.Context;
 
-import com.rodrigobresan.githubmvvm.data.GithubFactory;
-import com.rodrigobresan.githubmvvm.data.GithubService;
+import com.rodrigobresan.githubmvvm.di.component.DaggerNetComponent;
+import com.rodrigobresan.githubmvvm.di.component.NetComponent;
+import com.rodrigobresan.githubmvvm.di.module.AppModule;
+import com.rodrigobresan.githubmvvm.di.module.NetModule;
 
-import rx.Scheduler;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by rodrigobresan on 1/15/17.
@@ -18,38 +17,22 @@ import rx.schedulers.Schedulers;
 
 public class GithubApplication extends Application {
 
-    private GithubService githubService;
-    private Scheduler scheduler;
+    private NetComponent mNetComponent;
 
-    private static GithubApplication get(Context context) {
-        return (GithubApplication) context.getApplicationContext();
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        initializeNetComponent();
     }
 
-    public static GithubApplication create(Context context) {
-        return GithubApplication.get(context);
+    private void initializeNetComponent() {
+        mNetComponent = DaggerNetComponent.builder()
+                .appModule(new AppModule(this))
+                .netModule(new NetModule(getResources().getString(R.string.github_base_url)))
+                .build();
     }
 
-    public GithubService getGithubService() {
-        if (githubService == null) {
-            githubService = GithubFactory.create();
-        }
-
-        return githubService;
-    }
-
-    public Scheduler subscribeScheduler() {
-        if (scheduler == null) {
-            scheduler = Schedulers.io();
-        }
-
-        return scheduler;
-    }
-
-    public void setGithubService(GithubService githubService) {
-        this.githubService = githubService;
-    }
-
-    public void setScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
+    public NetComponent getNetComponent() {
+        return mNetComponent;
     }
 }

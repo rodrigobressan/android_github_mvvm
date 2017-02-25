@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GithubMVVM</string>
+    <string name="github_base_url">https://api.github.com</string>
 </resources>

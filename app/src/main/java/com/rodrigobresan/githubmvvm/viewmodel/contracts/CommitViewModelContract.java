@@ -14,8 +14,6 @@ import java.util.List;
  */
 public interface CommitViewModelContract {
     interface DetailView {
-        Context getContext();
-
         void loadCommits(List<Commit> repositoryDetails);
         void displayError();
     }
