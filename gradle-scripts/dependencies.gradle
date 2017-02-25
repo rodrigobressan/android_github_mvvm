@@ -8,6 +8,7 @@ ext {
 
     circleImageVersion = '1.3.0'
 
+    loggingInterceptorVersion = '3.3.1'
     junitVersion = '4.12'
     mockitoVersion = '1.10.19'
     robolectricVersion = '3.0'
@@ -22,11 +23,11 @@ ext {
     glidePackage = 'com.github.bumptech.glide'
     hdodenhofPackage = 'de.hdodenhof'
 
-
     junitPackage = 'junit'
     mockitoPackage = 'org.mockito'
     robolectricPackage = 'org.robolectric'
 
+    okHttpPackage = 'com.squareup.okhttp3'
 
     supportDependencies = [design           : buildDependency(supportPackage, 'design',
             supportVersion),
@@ -52,7 +53,7 @@ ext {
 
     rxDependencies = [rxAndroid: buildDependency(reactivePackage, 'rxandroid', rxAndroidVersion)]
 
-
+    loggingInterceptor = buildDependency(okHttpPackage, 'logging-interceptor', loggingInterceptorVersion)
     butterknife = buildDependency(jakeWhartonPackage, 'butterknife', butterknifeVersion)
     glide = buildDependency(glidePackage, 'glide', glideVersion)
     circleImageView = buildDependency(hdodenhofPackage, 'circleimageview', circleImageVersion)
