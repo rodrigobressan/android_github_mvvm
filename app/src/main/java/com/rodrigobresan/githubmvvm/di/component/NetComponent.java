@@ -12,6 +12,6 @@ import dagger.Component;
  */
 
 @Component
-public interface AppComponent {
+public interface NetComponent {
     void inject(CommitsActivity activity);
 }
