@@ -27,15 +27,15 @@ public class GithubApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        initializeAppComponent();
+        applicationComponent = prepareApplicationComponent().build();
     }
 
-    private void initializeAppComponent() {
-        applicationComponent = DaggerApplicationComponent.builder()
-                .appModule(new AppModule(this))
-                .netModule(new NetModule())
-                .apiModule(new ApiModule(getResources().getString(R.string.github_base_url)))
-                .build();
+    @NonNull
+    protected DaggerApplicationComponent.Builder prepareApplicationComponent() {
+        return DaggerApplicationComponent.builder()
+                        .appModule(new AppModule(this))
+                        .netModule(new NetModule())
+                        .apiModule(new ApiModule(getResources().getString(R.string.github_base_url)));
     }
 
     @NonNull
