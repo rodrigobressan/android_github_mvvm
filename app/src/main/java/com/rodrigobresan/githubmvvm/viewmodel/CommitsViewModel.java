@@ -69,7 +69,7 @@ public class CommitsViewModel implements CommitViewModelContract.ViewModel {
     private void fetchCommits() {
         unSubscribeFromObservable();
 
-        subscription = githubService.fetchRepositoryDetail(repository.repositoryOwner.login, repository.name)
+        subscription = githubService.fetchRepositoryDetail(repository.repositoryOwner().login, repository.name())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(scheduler)
                 .subscribe(new Action1<List<Commit>>() {
@@ -102,11 +102,11 @@ public class CommitsViewModel implements CommitViewModelContract.ViewModel {
     }
 
     public String getRepositoryName() {
-        return repository.name;
+        return repository.name();
     }
 
     public String getRepositoryDescription() {
-        return repository.description;
+        return repository.description();
     }
 
     @Override

@@ -8,6 +8,7 @@ import java.util.List;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
+import rx.Single;
 
 /**
  * Created by rodrigobresan on 1/15/17.
@@ -23,7 +24,8 @@ import rx.Observable;
 public interface GithubService {
 
     @GET("/users/{userId}/repos")
-    Observable<List<Repository>> fetchRepositories(@Path("userId") String userId);
+    Single<List<Repository>> fetchRepositories(@Path("userId") String userId);
+
 
     @GET("/repos/{userId}/{repositoryId}/commits")
     Observable<List<Commit>> fetchRepositoryDetail(@Path("userId") String owner, @Path("repositoryId") String repositoryId);

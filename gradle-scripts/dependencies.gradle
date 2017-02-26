@@ -35,6 +35,9 @@ ext {
 
     javaxPackage = 'javax.annotation'
 
+    assertJPackage = 'org.assertj'
+    asserJVersion = '2.5.0'
+
     supportDependencies = [design           : buildDependency(supportPackage, 'design',
             supportVersion),
                            recyclerView     : buildDependency(supportPackage, 'recyclerview-v7',
@@ -73,6 +76,7 @@ ext {
                                    mockitoVersion),
                            robolectric: buildDependency(robolectricPackage, 'robolectric',
                                    robolectricVersion),
+                            assertJ : buildDependency(assertJPackage, 'assertj-core', asserJVersion) ,
 
     ]
 }

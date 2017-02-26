@@ -25,11 +25,11 @@ public class ItemRepositoryViewModel extends BaseObservable {
     }
 
     public String getName() {
-        return repository.name;
+        return repository.name();
     }
 
     public String getDescription() {
-        return repository.description;
+        return repository.description();
     }
 
     public void onItemClick(View view) {
