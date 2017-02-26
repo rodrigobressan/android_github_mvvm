@@ -3,11 +3,9 @@ package com.rodrigobresan.githubmvvm.di.module;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapterFactory;
-import com.rodrigobresan.githubmvvm.data.GithubService;
 import com.rodrigobresan.githubmvvm.other.EntityTypeAdapterFactory;
 
 import javax.inject.Singleton;
@@ -17,11 +15,7 @@ import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Scheduler;
-import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 /**
@@ -33,11 +27,6 @@ import rx.schedulers.Schedulers;
 
 @Module
 public class NetModule {
-    String mBaseUrl;
-
-    public NetModule(String mBaseUrl) {
-        this.mBaseUrl = mBaseUrl;
-    }
 
     @Provides
     @Singleton
@@ -48,7 +37,8 @@ public class NetModule {
     }
 
 
-    @Provides @NonNull
+    @Provides
+    @NonNull
     @Singleton
     public TypeAdapterFactory provideTypeAdapterFactory() {
         return EntityTypeAdapterFactory.create();
@@ -80,25 +70,6 @@ public class NetModule {
                 .addInterceptor(loggingInterceptor);
 
         return clientBuilder.build();
-    }
-
-
-    @Provides
-    @Singleton
-    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(mBaseUrl)
-                .client(okHttpClient)
-                .build();
-        return retrofit;
-    }
-
-    @Provides
-    @Singleton
-    GithubService provideGithubService(Retrofit retrofit) {
-        return retrofit.create(GithubService.class);
     }
 
     @Provides

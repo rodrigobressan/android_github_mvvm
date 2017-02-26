@@ -2,7 +2,7 @@ package com.rodrigobresan.githubmvvm.model;
 
 import android.support.annotation.NonNull;
 
-import com.rodrigobresan.githubmvvm.data.GithubService;
+import com.rodrigobresan.githubmvvm.data.GithubApi;
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
 
 import java.util.List;
@@ -19,14 +19,14 @@ import rx.Single;
 public class RepositoryModel {
 
     @NonNull
-    private GithubService githubService;
+    private GithubApi githubApi;
 
-    public RepositoryModel(@NonNull GithubService githubService) {
-        this.githubService = githubService;
+    public RepositoryModel(@NonNull GithubApi githubApi) {
+        this.githubApi = githubApi;
     }
 
     @NonNull
     public Single<List<Repository>> getRepositories(String username) {
-        return githubService.fetchRepositories(username);
+        return githubApi.fetchRepositories(username);
     }
 }

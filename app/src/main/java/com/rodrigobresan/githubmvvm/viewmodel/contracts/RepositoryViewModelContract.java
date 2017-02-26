@@ -2,7 +2,6 @@ package com.rodrigobresan.githubmvvm.viewmodel.contracts;
 
 import android.content.Context;
 
-
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
 
 import java.util.List;

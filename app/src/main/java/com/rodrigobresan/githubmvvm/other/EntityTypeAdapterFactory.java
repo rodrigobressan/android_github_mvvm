@@ -1,6 +1,5 @@
 package com.rodrigobresan.githubmvvm.other;
 
-import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.ryanharter.auto.value.gson.GsonTypeAdapterFactory;
 

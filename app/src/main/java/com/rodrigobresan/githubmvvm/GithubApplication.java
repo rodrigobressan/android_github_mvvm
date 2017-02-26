@@ -1,9 +1,13 @@
 package com.rodrigobresan.githubmvvm;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.annotation.NonNull;
 
-import com.rodrigobresan.githubmvvm.di.component.DaggerNetComponent;
-import com.rodrigobresan.githubmvvm.di.component.NetComponent;
+import com.rodrigobresan.githubmvvm.data.GithubApi;
+import com.rodrigobresan.githubmvvm.di.component.ApplicationComponent;
+import com.rodrigobresan.githubmvvm.di.component.DaggerApplicationComponent;
+import com.rodrigobresan.githubmvvm.di.module.ApiModule;
 import com.rodrigobresan.githubmvvm.di.module.AppModule;
 import com.rodrigobresan.githubmvvm.di.module.NetModule;
 
@@ -17,22 +21,31 @@ import com.rodrigobresan.githubmvvm.di.module.NetModule;
 
 public class GithubApplication extends Application {
 
-    private NetComponent mNetComponent;
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        initializeNetComponent();
+
+        initializeAppComponent();
     }
 
-    private void initializeNetComponent() {
-        mNetComponent = DaggerNetComponent.builder()
+    private void initializeAppComponent() {
+        applicationComponent = DaggerApplicationComponent.builder()
                 .appModule(new AppModule(this))
-                .netModule(new NetModule(getResources().getString(R.string.github_base_url)))
+                .netModule(new NetModule())
+                .apiModule(new ApiModule(getResources().getString(R.string.github_base_url)))
                 .build();
     }
 
-    public NetComponent getNetComponent() {
-        return mNetComponent;
+    @NonNull
+    public ApplicationComponent getAppComponent() {
+        return applicationComponent;
+    }
+
+    // Prevent need in a singleton (global) reference to the application object
+    @NonNull
+    public static GithubApplication get(@NonNull Context context) {
+        return (GithubApplication) context.getApplicationContext();
     }
 }

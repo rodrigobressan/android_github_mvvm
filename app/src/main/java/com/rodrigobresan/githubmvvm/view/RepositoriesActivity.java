@@ -12,9 +12,8 @@ import android.widget.Toast;
 
 import com.rodrigobresan.githubmvvm.GithubApplication;
 import com.rodrigobresan.githubmvvm.R;
-import com.rodrigobresan.githubmvvm.data.GithubService;
+import com.rodrigobresan.githubmvvm.data.GithubApi;
 import com.rodrigobresan.githubmvvm.databinding.RepositoriesActivityBinding;
-import com.rodrigobresan.githubmvvm.di.component.NetComponent;
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.RepositoryViewModel;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
@@ -27,8 +26,6 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
 import rx.Scheduler;
-import rx.Subscriber;
-import rx.Subscription;
 
 
 /**
@@ -40,12 +37,12 @@ import rx.Subscription;
 
 public class RepositoriesActivity extends AppCompatActivity implements RepositoryViewModelContract.MainView {
 
-    private RepositoriesActivityBinding repositoriesActivityBinding;
-    private RepositoryViewModel repositoryViewModel;
-    private RepositoryViewModelContract.MainView mainView = this;
+    private RepositoriesActivityBinding viewBinding;
+
+    RepositoryViewModel repositoryViewModel;
 
     @Inject
-    GithubService githubService;
+    GithubApi githubApi;
 
     @Inject
     Scheduler scheduler;
@@ -54,19 +51,18 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        GithubApplication.get(getContext()).getAppComponent().inject(this);
+
         initDataBinding();
-        setSupportActionBar(repositoriesActivityBinding.toolbarRepositories);
-        setupListRepository(repositoriesActivityBinding.recyclerRepository);
+        setSupportActionBar(viewBinding.toolbarRepositories);
+        setupListRepository(viewBinding.recyclerRepository);
     }
 
+
     private void initDataBinding() {
-        NetComponent netComponent = ((GithubApplication) getApplication()).getNetComponent();
-
-        netComponent.inject(this);
-
-        repositoriesActivityBinding = DataBindingUtil.setContentView(this, R.layout.repositories_activity);
-        repositoryViewModel = new RepositoryViewModel(mainView, githubService, scheduler);
-        repositoriesActivityBinding.setRepositoryViewModel(repositoryViewModel);
+        viewBinding = DataBindingUtil.setContentView(this, R.layout.repositories_activity);
+        repositoryViewModel = new RepositoryViewModel(this, githubApi, scheduler);
+        viewBinding.setRepositoryViewModel(repositoryViewModel);
     }
 
     @Override
@@ -87,7 +83,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
 
     @Override
     public void loadData(List<Repository> repositoryList) {
-        RepositoryAdapter repositoryAdapter = (RepositoryAdapter) repositoriesActivityBinding.recyclerRepository.getAdapter();
+        RepositoryAdapter repositoryAdapter = (RepositoryAdapter) viewBinding.recyclerRepository.getAdapter();
         repositoryAdapter.setRepositoryList(repositoryList);
     }
 
@@ -97,22 +93,5 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
         recyclerRepository.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @Subcomponent(modules = RepositoriesActivityModule.class)
-    public interface RepositoriesActivityComponent {
-        void injecT(@NonNull RepositoriesActivity repositoriesActivity);
-    }
-
-    @Module
-    public static class RepositoriesActivityModule {
-
-        @Provides
-        @NonNull
-        public RepositoryViewModel provideRepositoryViewModel(@NonNull RepositoryViewModelContract.MainView mainView,
-                                                              @NonNull GithubService githubService,
-                                                              @NonNull Scheduler scheduler) {
-
-            return new RepositoryViewModel(mainView, githubService, scheduler);
-        }
-    }
 }
 

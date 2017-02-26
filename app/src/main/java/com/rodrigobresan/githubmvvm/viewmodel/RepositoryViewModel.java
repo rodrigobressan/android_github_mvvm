@@ -4,8 +4,7 @@ import android.databinding.ObservableInt;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.rodrigobresan.githubmvvm.data.GithubService;
-import com.rodrigobresan.githubmvvm.di.component.NetComponent;
+import com.rodrigobresan.githubmvvm.data.GithubApi;
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
@@ -35,18 +34,15 @@ public class RepositoryViewModel implements RepositoryViewModelContract.ViewMode
     private Subscription subscription;
 
     @NonNull
-    GithubService githubService;
+    GithubApi githubApi;
 
     @NonNull
     Scheduler scheduler;
 
-    public RepositoryViewModel(@NonNull RepositoryViewModelContract.MainView mainView,
-                               @NonNull GithubService githubService,
-                               @NonNull Scheduler scheduler) {
-
-        this.mainView = mainView;
-        this.githubService = githubService;
+    public RepositoryViewModel(RepositoryViewModelContract.MainView view, GithubApi githubApi, Scheduler scheduler) {
+        this.githubApi = githubApi;
         this.scheduler = scheduler;
+        this.mainView = view;
 
         repositoryProgress = new ObservableInt(View.GONE);
         repositoryList = new ObservableInt(View.GONE);
@@ -65,7 +61,7 @@ public class RepositoryViewModel implements RepositoryViewModelContract.ViewMode
     private void fetchRepositoryList() {
         unSubscribeFromObservable();
 
-        subscription = githubService.fetchRepositories("bresan")
+        subscription = githubApi.fetchRepositories("bresan")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(scheduler)
                 .subscribe(new Action1<List<Repository>>() {

@@ -1,6 +1,6 @@
 package com.rodrigobresan.githubmvvm.models;
 
-import com.rodrigobresan.githubmvvm.data.GithubService;
+import com.rodrigobresan.githubmvvm.data.GithubApi;
 import com.rodrigobresan.githubmvvm.model.RepositoryModel;
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
 
@@ -25,19 +25,19 @@ import static org.mockito.Mockito.when;
 
 public class RepositoriesModelTest {
 
-    private GithubService githubService;
+    private GithubApi githubApi;
     private RepositoryModel repositoryModel;
 
     @Before
     public void beforeEachTest() {
-        githubService = mock(GithubService.class);
-        repositoryModel = new RepositoryModel(githubService);
+        githubApi = mock(GithubApi.class);
+        repositoryModel = new RepositoryModel(githubApi);
     }
 
     @Test
     public void getRepositories_shouldReturnRepositoriesFromApi() {
         List<Repository> repositoryList = asList(mock(Repository.class), mock(Repository.class));
-        when(githubService.fetchRepositories("bresan")).thenReturn(Single.just(repositoryList));
+        when(githubApi.fetchRepositories("bresan")).thenReturn(Single.just(repositoryList));
 
         assertThat(repositoryModel.getRepositories("bresan").toBlocking().value())
                 .containsExactlyElementsOf(repositoryList);

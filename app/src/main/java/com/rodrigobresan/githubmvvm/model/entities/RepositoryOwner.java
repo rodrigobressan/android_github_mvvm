@@ -10,8 +10,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-import dagger.multibindings.IntoSet;
-
 /**
  * Created by rodrigobresan on 1/27/17.
  * <p>
