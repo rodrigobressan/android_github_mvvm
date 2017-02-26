@@ -13,7 +13,7 @@ import com.rodrigobresan.githubmvvm.GithubApplication;
 import com.rodrigobresan.githubmvvm.R;
 import com.rodrigobresan.githubmvvm.databinding.RepositoriesActivityBinding;
 import com.rodrigobresan.githubmvvm.di.component.NetComponent;
-import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.RepositoryViewModel;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 

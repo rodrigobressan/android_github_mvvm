@@ -13,10 +13,9 @@ import android.widget.Toast;
 import com.rodrigobresan.githubmvvm.GithubApplication;
 import com.rodrigobresan.githubmvvm.R;
 import com.rodrigobresan.githubmvvm.databinding.CommitsActivityBinding;
-import com.rodrigobresan.githubmvvm.di.component.DaggerNetComponent;
 import com.rodrigobresan.githubmvvm.di.component.NetComponent;
-import com.rodrigobresan.githubmvvm.model.Commit;
-import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.model.entities.Commit;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.CommitsViewModel;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.CommitViewModelContract;
 

@@ -1,16 +1,13 @@
 package com.rodrigobresan.githubmvvm.viewmodel;
 
-import android.app.Activity;
 import android.databinding.ObservableInt;
-import android.databinding.repacked.google.common.eventbus.Subscribe;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.rodrigobresan.githubmvvm.GithubApplication;
 import com.rodrigobresan.githubmvvm.data.GithubService;
 import com.rodrigobresan.githubmvvm.di.component.NetComponent;
-import com.rodrigobresan.githubmvvm.model.Commit;
-import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.model.entities.Commit;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.CommitViewModelContract;
 
 import java.util.List;

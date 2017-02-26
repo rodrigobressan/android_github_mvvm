@@ -1,8 +1,8 @@
 package com.rodrigobresan.githubmvvm.models;
 
 import com.rodrigobresan.githubmvvm.data.GithubService;
-import com.rodrigobresan.githubmvvm.model.Repository;
 import com.rodrigobresan.githubmvvm.model.RepositoryModel;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 
 import org.junit.Before;
 import org.junit.Test;

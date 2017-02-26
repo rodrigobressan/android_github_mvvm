@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.rodrigobresan.githubmvvm.R;
 import com.rodrigobresan.githubmvvm.databinding.ItemRepositoryBinding;
-import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.ItemRepositoryViewModel;
 
 import java.util.List;

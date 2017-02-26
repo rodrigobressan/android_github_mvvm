@@ -1,7 +1,7 @@
 package com.rodrigobresan.githubmvvm.data;
 
-import com.rodrigobresan.githubmvvm.model.Repository;
-import com.rodrigobresan.githubmvvm.model.Commit;
+import com.rodrigobresan.githubmvvm.model.entities.Commit;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 
 import java.util.List;
 

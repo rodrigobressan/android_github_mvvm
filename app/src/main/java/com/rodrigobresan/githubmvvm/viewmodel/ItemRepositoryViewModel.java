@@ -4,7 +4,7 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.view.View;
 
-import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 import com.rodrigobresan.githubmvvm.view.CommitsActivity;
 
 /**

@@ -2,7 +2,7 @@ package com.rodrigobresan.githubmvvm;
 
 import android.content.Context;
 
-import com.rodrigobresan.githubmvvm.model.Repository;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 import com.rodrigobresan.githubmvvm.viewmodel.ItemRepositoryViewModel;
 
 import org.junit.Before;
@@ -14,6 +14,7 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by rodrigobresan on 2/25/17.
@@ -54,5 +55,4 @@ public class ItemRepositoryViewModelTest {
 
         assertEquals(repository.description(), itemRepositoryViewModel.getDescription());
     }
-
 }

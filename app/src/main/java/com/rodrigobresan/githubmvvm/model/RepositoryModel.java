@@ -3,6 +3,7 @@ package com.rodrigobresan.githubmvvm.model;
 import android.support.annotation.NonNull;
 
 import com.rodrigobresan.githubmvvm.data.GithubService;
+import com.rodrigobresan.githubmvvm.model.entities.Repository;
 
 import java.util.List;
 

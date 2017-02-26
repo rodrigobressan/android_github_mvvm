@@ -1,4 +1,4 @@
-package com.rodrigobresan.githubmvvm.model;
+package com.rodrigobresan.githubmvvm.model.entities;
 
 /**
  * Created by rodrigobresan on 1/27/17.

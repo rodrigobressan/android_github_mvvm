@@ -3,12 +3,11 @@ package com.rodrigobresan.githubmvvm.view;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.rodrigobresan.githubmvvm.R;
 import com.rodrigobresan.githubmvvm.databinding.ItemCommitBinding;
-import com.rodrigobresan.githubmvvm.model.Commit;
+import com.rodrigobresan.githubmvvm.model.entities.Commit;
 import com.rodrigobresan.githubmvvm.viewmodel.ItemCommitViewModel;
 
 import java.util.List;

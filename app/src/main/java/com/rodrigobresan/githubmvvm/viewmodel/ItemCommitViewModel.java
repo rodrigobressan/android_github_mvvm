@@ -2,7 +2,7 @@ package com.rodrigobresan.githubmvvm.viewmodel;
 
 import android.databinding.BaseObservable;
 
-import com.rodrigobresan.githubmvvm.model.Commit;
+import com.rodrigobresan.githubmvvm.model.entities.Commit;
 
 /**
  * Created by rodrigobresan on 1/27/17.
