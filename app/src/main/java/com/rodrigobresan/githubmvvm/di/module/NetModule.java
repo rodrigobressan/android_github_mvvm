@@ -1,11 +1,14 @@
 package com.rodrigobresan.githubmvvm.di.module;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapterFactory;
 import com.rodrigobresan.githubmvvm.data.GithubService;
+import com.rodrigobresan.githubmvvm.other.EntityTypeAdapterFactory;
 
 import javax.inject.Singleton;
 
@@ -44,12 +47,20 @@ public class NetModule {
         return cache;
     }
 
+
+    @Provides @NonNull
+    @Singleton
+    public TypeAdapterFactory provideTypeAdapterFactory() {
+        return EntityTypeAdapterFactory.create();
+    }
+
     @Provides
     @Singleton
-    Gson provideGson() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        return gsonBuilder.create();
+    Gson provideGson(TypeAdapterFactory typeAdapterFactory) {
+
+        return new GsonBuilder()
+                .registerTypeAdapterFactory(typeAdapterFactory)
+                .create();
     }
 
     @Provides

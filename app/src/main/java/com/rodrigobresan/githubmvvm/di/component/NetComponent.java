@@ -3,6 +3,7 @@ package com.rodrigobresan.githubmvvm.di.component;
 import com.rodrigobresan.githubmvvm.di.module.AppModule;
 import com.rodrigobresan.githubmvvm.di.module.NetModule;
 import com.rodrigobresan.githubmvvm.view.CommitsActivity;
+import com.rodrigobresan.githubmvvm.view.RepositoriesActivity;
 import com.rodrigobresan.githubmvvm.viewmodel.CommitsViewModel;
 import com.rodrigobresan.githubmvvm.viewmodel.RepositoryViewModel;
 
@@ -23,4 +24,6 @@ import dagger.Module;
 public interface NetComponent {
     void inject(CommitsViewModel commitsViewModel);
     void inject(RepositoryViewModel repositoryViewModel);
+
+    void inject(RepositoriesActivity repositoriesActivity);
 }

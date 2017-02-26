@@ -21,21 +21,21 @@ public class RepositoryTest {
         Repository repositoryOne = Repository.builder()
                 .id(1)
                 .description("Description")
-                .repositoryOwner(new RepositoryOwner())
+                .repositoryOwner(RepositoryOwner.builder().build())
                 .url("repository_url")
                 .build();
 
         Repository repositoryOneCopy = Repository.builder()
                 .id(1)
                 .description("Description")
-                .repositoryOwner(new RepositoryOwner())
+                .repositoryOwner(RepositoryOwner.builder().build())
                 .url("repository_url")
                 .build();
 
         Repository repositoryTwo = Repository.builder()
                 .id(2)
                 .description("Description")
-                .repositoryOwner(new RepositoryOwner())
+                .repositoryOwner(RepositoryOwner.builder().build())
                 .url("repository_url")
                 .build();
 

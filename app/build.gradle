@@ -48,6 +48,7 @@ dependencies {
     compile glide
     compile butterknife
     compile loggingInterceptor
+    compile autoValueGson
 
     testCompile testingDependencies.assertJ
     testCompile testingDependencies.junit

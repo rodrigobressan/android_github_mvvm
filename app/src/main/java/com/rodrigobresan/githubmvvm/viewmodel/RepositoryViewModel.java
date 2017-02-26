@@ -11,8 +11,6 @@ import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContr
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -30,21 +28,25 @@ public class RepositoryViewModel implements RepositoryViewModelContract.ViewMode
     public ObservableInt repositoryProgress;
     public ObservableInt repositoryList;
 
+    @NonNull
     private RepositoryViewModelContract.MainView mainView;
 
+    @NonNull
     private Subscription subscription;
 
-    @Inject
+    @NonNull
     GithubService githubService;
 
-    @Inject
+    @NonNull
     Scheduler scheduler;
 
     public RepositoryViewModel(@NonNull RepositoryViewModelContract.MainView mainView,
-                               @NonNull NetComponent netComponent) {
-        this.mainView = mainView;
+                               @NonNull GithubService githubService,
+                               @NonNull Scheduler scheduler) {
 
-        netComponent.inject(this);
+        this.mainView = mainView;
+        this.githubService = githubService;
+        this.scheduler = scheduler;
 
         repositoryProgress = new ObservableInt(View.GONE);
         repositoryList = new ObservableInt(View.GONE);
