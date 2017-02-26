@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.rodrigobresan.githubmvvm.GithubApplication;
@@ -88,7 +89,7 @@ public class RepositoriesActivity extends AppCompatActivity implements Repositor
     }
 
     public void setupListRepository(RecyclerView recyclerRepository) {
-        RepositoryAdapter repositoryAdapter = new RepositoryAdapter();
+        RepositoryAdapter repositoryAdapter = new RepositoryAdapter(LayoutInflater.from(this));
         recyclerRepository.setAdapter(repositoryAdapter);
         recyclerRepository.setLayoutManager(new LinearLayoutManager(this));
     }

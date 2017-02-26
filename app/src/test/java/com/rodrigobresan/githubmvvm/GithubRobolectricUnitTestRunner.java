@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 
 public class GithubRobolectricUnitTestRunner extends RobolectricTestRunner {
 
-    private static final int SDK_EMULATE_LEVEL = 23;
+    private static final int SDK_EMULATE_LEVEL = 21;
 
     public GithubRobolectricUnitTestRunner(@NonNull Class<?> klass) throws Exception {
         super(klass);

@@ -1,6 +1,7 @@
 package com.rodrigobresan.githubmvvm.view;
 
 import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -20,9 +21,14 @@ import java.util.List;
  */
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder> {
 
+    private final LayoutInflater layoutInflater;
     private List<Repository> repositoryList;
 
-    public void setRepositoryList(List<Repository> repositoryList) {
+    public RepositoryAdapter(@NonNull LayoutInflater layoutInflater) {
+        this.layoutInflater = layoutInflater;
+    }
+
+    public void setRepositoryList(@NonNull List<Repository> repositoryList) {
         this.repositoryList = repositoryList;
         notifyDataSetChanged();
     }
@@ -30,7 +36,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
     @Override
     public RepositoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemRepositoryBinding itemRepositoryBinding = DataBindingUtil
-                .inflate(LayoutInflater.from(parent.getContext()),
+                .inflate(layoutInflater,
                         R.layout.item_repository,
                         parent,
                         false);
@@ -45,6 +51,10 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
 
     @Override
     public int getItemCount() {
+        if (repositoryList == null) {
+            return 0;
+        }
+
         return repositoryList.size();
     }
 
@@ -58,7 +68,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
             this.itemRepositoryBinding = itemRepositoryBinding;
         }
 
-        void bindRepository(Repository repository) {
+        public void bindRepository(Repository repository) {
             if (itemRepositoryBinding.getItemRepositoryViewModel() == null) {
                 itemRepositoryBinding.setItemRepositoryViewModel(new ItemRepositoryViewModel(
                         repository, itemView.getContext()));

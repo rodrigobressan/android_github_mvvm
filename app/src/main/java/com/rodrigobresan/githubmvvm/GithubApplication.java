@@ -35,7 +35,7 @@ public class GithubApplication extends Application {
         return DaggerApplicationComponent.builder()
                         .appModule(new AppModule(this))
                         .netModule(new NetModule())
-                        .apiModule(new ApiModule(getResources().getString(R.string.github_base_url)));
+                        .apiModule(new ApiModule("https://api.github.com"));
     }
 
     @NonNull
