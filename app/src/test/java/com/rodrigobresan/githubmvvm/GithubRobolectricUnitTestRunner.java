@@ -2,7 +2,6 @@ package com.rodrigobresan.githubmvvm;
 
 import android.support.annotation.NonNull;
 
-import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 

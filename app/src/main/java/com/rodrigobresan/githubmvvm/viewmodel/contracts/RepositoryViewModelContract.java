@@ -19,9 +19,11 @@ public interface RepositoryViewModelContract {
         Context getContext();
         void displayError();
         void loadData(List<Repository> repositoryList);
+        void onItemSelected(Repository repository);
     }
 
     interface ViewModel {
         void destroy();
+        void loadData();
     }
 }

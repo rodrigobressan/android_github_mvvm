@@ -7,8 +7,7 @@ import com.rodrigobresan.githubmvvm.data.GithubApi;
 import com.rodrigobresan.githubmvvm.di.module.ApiModule;
 import com.rodrigobresan.githubmvvm.di.module.AppModule;
 import com.rodrigobresan.githubmvvm.di.module.NetModule;
-import com.rodrigobresan.githubmvvm.view.RepositoriesActivity;
-import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
+import com.rodrigobresan.githubmvvm.view.RepositoriesFragment;
 
 import javax.inject.Singleton;
 
@@ -34,6 +33,6 @@ public interface ApplicationComponent {
     @NonNull
     GithubApi githubApi();
 
-    void inject(@NonNull RepositoriesActivity repositoriesActivity);
+    void inject(@NonNull RepositoriesFragment repositoriesFragment);
 
 }

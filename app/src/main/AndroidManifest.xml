@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.rodrigobresan.githubmvvm">
+    package="com.rodrigobresan.githubmvvm">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".GithubApplication"
         android:allowBackup="true"
@@ -13,19 +13,13 @@
 
         <!-- Listing all repositories screen -->
         <activity
-            android:name=".view.RepositoriesActivity"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Repository detail screen -->
-        <activity
-            android:name=".view.CommitsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

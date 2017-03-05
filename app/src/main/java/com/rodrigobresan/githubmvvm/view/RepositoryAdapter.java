@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import com.rodrigobresan.githubmvvm.R;
 import com.rodrigobresan.githubmvvm.databinding.ItemRepositoryBinding;
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
+import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
 import com.rodrigobresan.githubmvvm.viewmodel.ItemRepositoryViewModel;
+import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
 import java.util.List;
 
@@ -22,10 +24,14 @@ import java.util.List;
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder> {
 
     private final LayoutInflater layoutInflater;
+    private final RepositoryViewModelContract.MainView view;
     private List<Repository> repositoryList;
 
-    public RepositoryAdapter(@NonNull LayoutInflater layoutInflater) {
+    public RepositoryAdapter(@NonNull RepositoryViewModelContract.MainView view,
+                             @NonNull LayoutInflater layoutInflater) {
+
         this.layoutInflater = layoutInflater;
+        this.view = view;
     }
 
     public void setRepositoryList(@NonNull List<Repository> repositoryList) {
@@ -70,8 +76,8 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Re
 
         public void bindRepository(Repository repository) {
             if (itemRepositoryBinding.getItemRepositoryViewModel() == null) {
-                itemRepositoryBinding.setItemRepositoryViewModel(new ItemRepositoryViewModel(
-                        repository, itemView.getContext()));
+                ItemRepositoryViewModel viewModel = new ItemRepositoryViewModel(view, repository);
+                itemRepositoryBinding.setItemRepositoryViewModel(viewModel);
             } else {
                 itemRepositoryBinding.getItemRepositoryViewModel().setRepository(repository);
             }

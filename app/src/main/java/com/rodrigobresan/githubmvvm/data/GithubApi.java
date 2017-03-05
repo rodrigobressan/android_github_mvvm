@@ -21,6 +21,14 @@ import rx.Single;
  */
 public interface GithubApi {
 
-    @GET("/users/{userId}/repos")
-    Single<List<Repository>> fetchRepositories(@Path("userId") String userId);
+    String REPOSITORIES_PATH_USER_ID = "userId";
+    String REPOSITORIES_PATH = "/users/{" + REPOSITORIES_PATH_USER_ID + "}/repos";
+
+    /**
+     * Call for returning the list of repositories of a received user
+     * @param userId the id of the user that we want to fetch the repositories
+     * @return the list of repositories of that user
+     */
+    @GET(REPOSITORIES_PATH)
+    Single<List<Repository>> fetchRepositories(@Path(REPOSITORIES_PATH_USER_ID) String userId);
 }

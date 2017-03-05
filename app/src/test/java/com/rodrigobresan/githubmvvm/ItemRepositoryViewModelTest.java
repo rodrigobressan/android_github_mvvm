@@ -3,7 +3,9 @@ package com.rodrigobresan.githubmvvm;
 import android.content.Context;
 
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
+import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
 import com.rodrigobresan.githubmvvm.viewmodel.ItemRepositoryViewModel;
+import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +34,12 @@ public class ItemRepositoryViewModelTest {
     @Mock
     Context mockedContext;
 
+    @Mock
+    RepositoryViewModelContract.MainView view;
+
+    @Mock
+    CustomImageLoader customImageLoader;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -41,7 +49,7 @@ public class ItemRepositoryViewModelTest {
     public void shouldReturnRepositoryName() {
         Repository repository = Repository.builder().name(REPOSITORY_NAME).build();
 
-        ItemRepositoryViewModel itemRepositoryViewModel = new ItemRepositoryViewModel(repository, mockedContext);
+        ItemRepositoryViewModel itemRepositoryViewModel = new ItemRepositoryViewModel(view, repository, customImageLoader);
 
         assertEquals(repository.name(), itemRepositoryViewModel.getName());
     }
@@ -50,7 +58,7 @@ public class ItemRepositoryViewModelTest {
     public void shouldReturnRepositoryDescription() {
         Repository repository = Repository.builder().description(REPOSITORY_DESCRIPTION).build();
 
-        ItemRepositoryViewModel itemRepositoryViewModel = new ItemRepositoryViewModel(repository, mockedContext);
+        ItemRepositoryViewModel itemRepositoryViewModel = new ItemRepositoryViewModel(view, repository, customImageLoader);
 
         assertEquals(repository.description(), itemRepositoryViewModel.getDescription());
     }

@@ -16,6 +16,10 @@ import java.io.Serializable;
  * E-mail: rcbresan@gmail.com
  * Github: bresan
  */
+
+/**
+ * This class does use the AutoValue library in order to allow easier usage of the Builder pattern
+ */
 @AutoValue
 public abstract class Repository implements Serializable {
 

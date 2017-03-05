@@ -6,11 +6,15 @@ import android.view.View;
 
 import com.rodrigobresan.githubmvvm.data.GithubApi;
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
+import com.rodrigobresan.githubmvvm.rx.MyRxBus;
+import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
 import java.util.List;
 
+import rx.Observable;
 import rx.Scheduler;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -26,6 +30,7 @@ public class RepositoryViewModel implements RepositoryViewModelContract.ViewMode
 
     public ObservableInt repositoryProgress;
     public ObservableInt repositoryList;
+    private String user;
 
     @NonNull
     private RepositoryViewModelContract.MainView mainView;
@@ -34,23 +39,34 @@ public class RepositoryViewModel implements RepositoryViewModelContract.ViewMode
     private Subscription subscription;
 
     @NonNull
-    GithubApi githubApi;
+    private CustomImageLoader imageLoader;
 
     @NonNull
-    Scheduler scheduler;
+    private GithubApi githubApi;
 
-    public RepositoryViewModel(RepositoryViewModelContract.MainView view, GithubApi githubApi, Scheduler scheduler) {
+    @NonNull
+    private Scheduler scheduler;
+
+    public RepositoryViewModel(@NonNull String user,
+                               @NonNull RepositoryViewModelContract.MainView view,
+                               @NonNull GithubApi githubApi,
+                               @NonNull Scheduler scheduler,
+                               @NonNull CustomImageLoader customImageLoader) {
+
+        this.user = user;
         this.githubApi = githubApi;
         this.scheduler = scheduler;
         this.mainView = view;
+        this.imageLoader = customImageLoader;
 
-        repositoryProgress = new ObservableInt(View.GONE);
-        repositoryList = new ObservableInt(View.GONE);
+        initObservables();
+        initializeViews();
+        initFabListener();
     }
 
-    public void onClickFabLoad(View view) {
-        initializeViews();
-        fetchRepositoryList();
+    private void initObservables() {
+        repositoryProgress = new ObservableInt(View.GONE);
+        repositoryList = new ObservableInt(View.GONE);
     }
 
     private void initializeViews() {
@@ -58,10 +74,34 @@ public class RepositoryViewModel implements RepositoryViewModelContract.ViewMode
         repositoryList.set(View.GONE);
     }
 
+    /**
+     * This is our listener for any events dispatched from the Floating action button on the
+     * Main Activity.
+     */
+    private void initFabListener() {
+        Observable<Object> events = MyRxBus.getInstance().getEvents();
+
+        events.subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                loadData();
+            }
+        });
+    }
+
     private void fetchRepositoryList() {
         unSubscribeFromObservable();
 
-        subscription = githubApi.fetchRepositories("bresan")
+        subscription = githubApi.fetchRepositories(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(scheduler)
                 .subscribe(new Action1<List<Repository>>() {
@@ -101,5 +141,10 @@ public class RepositoryViewModel implements RepositoryViewModelContract.ViewMode
     public void destroy() {
         unSubscribeFromObservable();
         mainView = null;
+    }
+
+    @Override
+    public void loadData() {
+        fetchRepositoryList();
     }
 }

@@ -2,6 +2,8 @@ package com.rodrigobresan.githubmvvm.view;
 
 
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.rodrigobresan.githubmvvm.MainActivity;
 import com.rodrigobresan.githubmvvm.R;
 
 import org.hamcrest.Description;
@@ -29,19 +32,16 @@ import static org.hamcrest.Matchers.allOf;
 public class RepositoriesActivityTest {
 
     @Rule
-    public ActivityTestRule<RepositoriesActivity> mActivityTestRule = new ActivityTestRule<>(RepositoriesActivity.class);
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void testFloatingActionButtonDisplayed() {
-        ViewInteraction floatingActionButton = onView(
-                allOf(withId(R.id.fab_load_repositories),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        floatingActionButton.check(matches(isDisplayed()));
+        onView(withId(R.id.fab_load_repositories)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testFloatingActionButtonClick() {
+        onView(withId(R.id.fab_load_repositories)).perform(ViewActions.click());
 
     }
 

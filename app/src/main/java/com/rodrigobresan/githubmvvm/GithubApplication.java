@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.rodrigobresan.githubmvvm.data.GithubApi;
 import com.rodrigobresan.githubmvvm.di.component.ApplicationComponent;
 import com.rodrigobresan.githubmvvm.di.component.DaggerApplicationComponent;
 import com.rodrigobresan.githubmvvm.di.module.ApiModule;

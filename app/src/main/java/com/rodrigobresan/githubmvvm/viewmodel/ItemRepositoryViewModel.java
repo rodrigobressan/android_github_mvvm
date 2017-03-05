@@ -1,10 +1,12 @@
 package com.rodrigobresan.githubmvvm.viewmodel;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
+import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
+import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
 /**
  * Created by rodrigobresan on 1/15/17.
@@ -15,12 +17,14 @@ import com.rodrigobresan.githubmvvm.model.entities.Repository;
 
 public class ItemRepositoryViewModel extends BaseObservable {
 
-    private Repository repository;
-    private Context context;
+    private final RepositoryViewModelContract.MainView view;
 
-    public ItemRepositoryViewModel(Repository repository, Context context) {
+    private Repository repository;
+
+    public ItemRepositoryViewModel(@NonNull RepositoryViewModelContract.MainView view,
+                                   @NonNull Repository repository) {
         this.repository = repository;
-        this.context = context;
+        this.view = view;
     }
 
     public String getName() {
@@ -31,8 +35,8 @@ public class ItemRepositoryViewModel extends BaseObservable {
         return repository.description();
     }
 
-    public void onItemClick(View view) {
-     //   context.startActivity(CommitsActivity.launchDetail(view.getContext(), repository));
+    public void onItemClick(View clickedView) {
+        view.onItemSelected(repository);
     }
 
     public void setRepository(Repository repository) {

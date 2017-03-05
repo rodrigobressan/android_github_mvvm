@@ -5,17 +5,19 @@ import android.view.LayoutInflater;
 
 import com.rodrigobresan.githubmvvm.GithubRobolectricUnitTestRunner;
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
+import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
 import com.rodrigobresan.githubmvvm.view.RepositoryAdapter;
+import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 
 import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static java.util.Arrays.spliterator;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -34,10 +36,16 @@ public class RepositoriesAdapterTest {
     private LayoutInflater layoutInflater;
     private RepositoryAdapter repositoryAdapter;
 
+    @Mock
+    CustomImageLoader imageLoader;
+
+    @Mock
+    RepositoryViewModelContract.MainView view;
+
     @Before
     public void beforeEachTest() {
         layoutInflater = mock(LayoutInflater.class);
-        repositoryAdapter = new RepositoryAdapter(layoutInflater);
+        repositoryAdapter = new RepositoryAdapter(view, layoutInflater);
     }
 
     @Test

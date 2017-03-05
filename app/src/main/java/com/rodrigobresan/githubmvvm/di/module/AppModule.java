@@ -1,6 +1,9 @@
 package com.rodrigobresan.githubmvvm.di.module;
 
 import android.app.Application;
+import android.content.Context;
+
+import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
 
 import javax.inject.Singleton;
 
@@ -23,10 +26,20 @@ public class AppModule {
         this.application = application;
     }
 
+    /**
+     * Provides the current application
+     * @return the current application
+     */
     @Provides
     @Singleton
     Application providesApplication() {
         return this.application;
+    }
+
+    @Provides
+    @Singleton
+    CustomImageLoader providesCustomImageLoader(Application application) {
+        return new CustomImageLoader(application);
     }
 
 }

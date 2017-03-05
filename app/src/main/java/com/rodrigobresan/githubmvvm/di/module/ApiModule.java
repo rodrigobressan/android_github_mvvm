@@ -25,7 +25,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ApiModule {
 
-    // TODO: Make the base url changeable
     @NonNull
     private final String baseUrl;
 
@@ -33,6 +32,12 @@ public class ApiModule {
         this.baseUrl = baseUrl;
     }
 
+    /**
+     * This method provides to us our GithubApi Service, used for making the requests to Github API
+     * @param okHttpClient the client used for doing the HTTP requests
+     * @param gson the gson used for converting our received data
+     * @return the instance of our GithubApi
+     */
     @Provides
     @Singleton
     GithubApi provideGitHubApi(@NonNull OkHttpClient okHttpClient,

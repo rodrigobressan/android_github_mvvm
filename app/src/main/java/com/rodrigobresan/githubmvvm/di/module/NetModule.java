@@ -28,15 +28,29 @@ import rx.schedulers.Schedulers;
 @Module
 public class NetModule {
 
+    /**
+     * Values to be used on our OkHttpCache
+     */
+    private static final int SIZE_MEGABYTE = 1024 * 1024;
+    private static final int CACHE_SIZE = 10 * SIZE_MEGABYTE;
+
+    /**
+     * Provides the instance of our HttpCache.
+     * @param application the object of our application, used for retrieve the cache directory
+     * @return the OkHttpCache instance
+     */
     @Provides
     @Singleton
     Cache provideOkHttpCache(Application application) {
-        int cacheSize = 10 * 1024 * 1024; // 10 MiB
-        Cache cache = new Cache(application.getCacheDir(), cacheSize);
+        Cache cache = new Cache(application.getCacheDir(), CACHE_SIZE);
         return cache;
     }
 
-
+    /**
+     * Provides one instance of our TypeAdapterFactory. We need to do it since we are using
+     * AutoValue library
+     * @return the instance of the {@link TypeAdapterFactory}
+     */
     @Provides
     @NonNull
     @Singleton
@@ -44,6 +58,11 @@ public class NetModule {
         return EntityTypeAdapterFactory.create();
     }
 
+    /**
+     * Provides our Gson object in order to deserialize our objects received through OkHttpClient
+     * @param typeAdapterFactory the adapter factory used for deserialize our objects
+     * @return the instance of our Gson object
+     */
     @Provides
     @Singleton
     Gson provideGson(TypeAdapterFactory typeAdapterFactory) {
@@ -53,6 +72,10 @@ public class NetModule {
                 .create();
     }
 
+    /**
+     * Provides our Http Logging Interceptor that will print all our requests into log cat
+     * @return instance of the HttpLoggingInterceptor
+     */
     @Provides
     @Singleton
     HttpLoggingInterceptor provideLoggingInterceptor() {
@@ -62,6 +85,12 @@ public class NetModule {
         return logging;
     }
 
+    /**
+     * Provides our Http Client
+     * @param cache cache used for the requests
+     * @param loggingInterceptor logging interceptor
+     * @return instance of the OkHttpClient
+     */
     @Provides
     @Singleton
     OkHttpClient provideOkHttpClient(Cache cache, HttpLoggingInterceptor loggingInterceptor) {
@@ -72,6 +101,10 @@ public class NetModule {
         return clientBuilder.build();
     }
 
+    /**
+     * Provides our subscriber for usage with RxJava
+     * @return
+     */
     @Provides
     @Singleton
     Scheduler providesSubscriber() {
