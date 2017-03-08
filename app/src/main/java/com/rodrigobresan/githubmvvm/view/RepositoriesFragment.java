@@ -34,6 +34,8 @@ import rx.Scheduler;
 
 public class RepositoriesFragment extends Fragment implements RepositoryViewModelContract.MainView {
 
+    public static final String TAG = RepositoriesFragment.class.getCanonicalName();
+
     private static final String USER_TO_LOAD = "bresan";
 
     public RepositoryViewModel repositoryViewModel;
@@ -93,6 +95,7 @@ public class RepositoriesFragment extends Fragment implements RepositoryViewMode
 
     @Override
     public void onItemSelected(Repository repository) {
+        DetailedRepositoryActivity.start(getContext(), repository);
         Toast.makeText(getContext(), "Click on item: " + repository.name(), Toast.LENGTH_SHORT).show();
     }
 
@@ -104,6 +107,12 @@ public class RepositoriesFragment extends Fragment implements RepositoryViewMode
     public void onResume() {
         super.onResume();
         repositoryViewModel.loadData();
+    }
+
+    @Override
+    public void onDestroy() {
+        repositoryViewModel.destroy();
+        super.onDestroy();
     }
 }
 

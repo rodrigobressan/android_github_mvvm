@@ -1,7 +1,5 @@
 package com.rodrigobresan.githubmvvm.viewmodel.contracts;
 
-import android.content.Context;
-
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
 
 import java.util.List;
@@ -16,7 +14,6 @@ import java.util.List;
 public interface RepositoryViewModelContract {
 
     interface MainView {
-        Context getContext();
         void displayError();
         void loadData(List<Repository> repositoryList);
         void onItemSelected(Repository repository);

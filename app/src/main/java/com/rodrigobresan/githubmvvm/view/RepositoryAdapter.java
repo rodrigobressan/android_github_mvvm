@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.rodrigobresan.githubmvvm.R;
 import com.rodrigobresan.githubmvvm.databinding.ItemRepositoryBinding;
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
-import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
 import com.rodrigobresan.githubmvvm.viewmodel.ItemRepositoryViewModel;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 

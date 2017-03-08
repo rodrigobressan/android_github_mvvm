@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.rodrigobresan.githubmvvm.model.entities.Repository;
-import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
 import com.rodrigobresan.githubmvvm.viewmodel.contracts.RepositoryViewModelContract;
 
 /**

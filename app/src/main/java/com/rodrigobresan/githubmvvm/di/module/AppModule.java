@@ -1,7 +1,6 @@
 package com.rodrigobresan.githubmvvm.di.module;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.rodrigobresan.githubmvvm.util.CustomImageLoader;
 
