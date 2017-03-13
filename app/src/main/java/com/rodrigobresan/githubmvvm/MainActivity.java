@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         initFragmentHelper();
         addRepositoriesFragmentIntoScreen();
-        ButterKnife.bind(this);
     }
 
     private void initFragmentHelper() {
@@ -32,8 +31,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentHelper.addFragment(new RepositoriesFragment(), RepositoriesFragment.TAG);
     }
 
-    @OnClick(R.id.fab_load_repositories)
-    public void onLoadRepositoriesClick() {
-        MyRxBus.getInstance().setString("fab_click");
-    }
 }

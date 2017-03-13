@@ -50,16 +50,6 @@
             android:layout_height="wrap_content"
             android:text="after" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_load_repositories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="@dimen/fab_margin_bottom"
-            android:layout_marginLeft="@dimen/fab_margin_horizontal"
-            android:src="@android:drawable/stat_notify_sync" />
-
     </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

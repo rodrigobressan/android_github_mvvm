@@ -27,7 +27,7 @@ public class RepositoriesFragmentTest {
 
         repositoriesFragment.repositoryViewModel = repositoryViewModel;
 
-        repositoriesFragment.onFabClick();
+        repositoriesFragment.onClickFab();
 
         verify(repositoryViewModel).loadData();
     }

@@ -32,7 +32,7 @@ import rx.Scheduler;
  * Github: bresan
  */
 
-public class RepositoriesFragment extends Fragment implements RepositoryViewModelContract.MainView {
+public class RepositoriesFragment extends Fragment implements RepositoryViewModelContract.MainView, View.OnClickListener {
 
     public static final String TAG = RepositoriesFragment.class.getCanonicalName();
 
@@ -65,7 +65,7 @@ public class RepositoriesFragment extends Fragment implements RepositoryViewMode
         return dataBinding.getRoot();
     }
 
-    public void onFabClick() {
+    public void onClickFab() {
         repositoryViewModel.loadData();
     }
 
@@ -74,6 +74,11 @@ public class RepositoriesFragment extends Fragment implements RepositoryViewMode
         super.onViewCreated(view, savedInstanceState);
         setViewModel();
         initRepositoryList();
+        initEventListeners();
+    }
+
+    private void initEventListeners() {
+        dataBinding.fabLoadRepositories.setOnClickListener(this);
     }
 
     private void initRepositoryList() {
@@ -113,6 +118,15 @@ public class RepositoriesFragment extends Fragment implements RepositoryViewMode
     public void onDestroy() {
         repositoryViewModel.destroy();
         super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab_load_repositories:
+                repositoryViewModel.loadData();
+                break;
+        }
     }
 }
 
